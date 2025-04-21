@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roccia - Menus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1da96c;
+            --dark: #1a2a3a;
+            --light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url('enhancedroccia.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            color: var(--light);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .menu-container {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .menu-title {
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .menu-title h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .menu-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 40px auto;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 250px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--light);
+            padding: 30px;
+        }
+
+        .menu-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .menu-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .menu-name {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-cards {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 15px;
+            }
+
+            .menu-card {
+                height: 200px;
+                max-width: 320px;
+            }
+
+            .menu-icon {
+                font-size: 3rem;
+            }
+
+            .menu-name {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html#activities" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+
+    <div class="menu-container">
+        <div class="menu-title">
+            <h1>Our Menus</h1>
+        </div>
+
+        <div class="menu-cards">
+            <!-- Food Menu Card -->
+            <a href="Restuarant Menu.pdf" target="_blank" class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="menu-name">Food Menu</div>
+            </a>
+
+            <!-- Drinks Menu Card -->
+            <a href="Bar Menu.pdf" target="_blank" class="menu-card">
+                <div class="menu-icon">
+                    <i class="fas fa-glass-martini-alt"></i>
+                </div>
+                <div class="menu-name">Drinks Menu</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Back button functionality with fade effect
+        document.querySelector('.back-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                window.location.href = 'index.html#activities';
+            }, 300);
+        });
+
+        // Fade-in effect on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+                document.body.style.transition = 'opacity 0.3s ease';
+            }, 100);
+        });
+
+        // Add click handler for menu cards
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.body.style.opacity = '0.5';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
+
