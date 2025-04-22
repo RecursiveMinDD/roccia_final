@@ -1781,7 +1781,14 @@
                 <ul id="nav-menu">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#activities">Activities</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#Activities">Activities</a>
+                        <div class="dropdown-content">
+                            <a href="activities.html">Passes</a>
+                            <a href="#activities" onclick="scrollToActivities(event)">All Activities</a>
+                        </div>
+                    </li>
+                   
                     <li class="nav-dropdown">
                         <a href="#gallery">Gallery</a>
                         <div class="dropdown-content">
@@ -2044,7 +2051,7 @@
                             <h3>Suite Room</h3>
                             <p>"Not just a stay, an escape into elegance. Your private slice of paradise."</p>
                             <div class="activity-meta">
-                                <span class="activity-price">8500/Night (Excl. of GST)
+                                <span class="activity-price">8500/Night (Excl. of GST) (WITH BREAKFAST)
                                 </span>
                                 <a href="booking.html?type=villa" class="activity-btn">Book Now</a>
                             </div>
@@ -2058,7 +2065,7 @@
                             <h3>Super Deluxe</h3>
                             <p>"Indulge in unmatched comfort and elegance crafted for your perfect getaway. </p>
                             <div class="activity-meta">
-                                <span class="activity-price">5500/Night (Excl. of GST)
+                                <span class="activity-price">5500/Night (Excl. of GST) (WITH BREAKFAST)
                                 </span>
                                 <a href="booking.html?type=superdeluxe" class="activity-btn">Book Now</a>
                             </div>
@@ -2073,7 +2080,7 @@
                             <p>"Where the wild meets the wow. Camp high, live free."
                                 "Sleep under stars, wake up to peaks."</p>
                             <div class="activity-meta">
-                                <span class="activity-price">3750/Night (Excl. of GST)
+                                <span class="activity-price">3750/Night (Excl. of GST) (WITH BREAKFAST)
                                 </span>
                                 <a href="booking.html?type=tents" class="activity-btn">Book Now</a>
                             </div>
@@ -2366,7 +2373,7 @@
                 <ul class="footer-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About Us</a></li>
-                    <li><a href="#activities">Activities</a></li>
+                    <li><a href="activities.html">Activities</a></li>
                     <li><a href="#resort">Resort</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -2871,43 +2878,38 @@
             observer.observe(videoSection);
         });
 
-        // Replace the existing reload handling code with this:
-        window.addEventListener('load', function () {
+        // Replace the existing refresh handling code with this:
+        window.addEventListener('load', function() {
             // Check if it's a page reload
             if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-                // Prevent default scroll behavior
+                // Immediately scroll to top
                 window.scrollTo(0, 0);
-
-                // Add fade-out effect
+                
+                // Add fade effect
                 document.body.style.opacity = '0';
-
-                // Reset any active states or animations
-                document.querySelectorAll('.animated').forEach(el => {
-                    el.classList.remove('animated');
-                });
-
-                // Clear any hash from URL
-                history.replaceState(null, null, window.location.pathname + '#home');
-
-                // Fade back in and restart animations
+                document.body.style.transition = 'opacity 0.3s ease';
+                
                 setTimeout(() => {
-                    document.body.style.opacity = '1';
-
-                    // Force scroll to home section
+                    // Clear any existing hash from URL
+                    history.replaceState(null, null, window.location.pathname);
+                    
+                    // Scroll to home section
                     const homeSection = document.getElementById('home');
                     if (homeSection) {
                         homeSection.scrollIntoView({ behavior: 'instant' });
                     }
-
-                    // Restart typewriter animation
+                    
+                    // Fade back in
+                    document.body.style.opacity = '1';
+                    
+                    // Reset animations
                     const typewriterText = document.querySelector('.typewriter-text');
                     if (typewriterText) {
                         typewriterText.style.animation = 'none';
                         typewriterText.offsetHeight; // Trigger reflow
                         typewriterText.style.animation = 'typing 1.5s steps(40, end)';
                     }
-
-                    // Reset and restart hero section animations
+                    
                     const heroContent = document.querySelector('.hero-content');
                     if (heroContent) {
                         heroContent.style.animation = 'none';
@@ -2918,44 +2920,39 @@
             }
         });
 
-        // Update the manual refresh handler as well
-        document.addEventListener('keydown', function (e) {
+        // Handle manual refresh (F5 or Ctrl/Cmd + R)
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'F5' || (e.key === 'r' && (e.ctrlKey || e.metaKey))) {
                 e.preventDefault();
-
-                // Force scroll to top immediately
+                
+                // Immediately scroll to top
                 window.scrollTo(0, 0);
-
-                // Add fade-out effect
+                
+                // Add fade effect
                 document.body.style.opacity = '0';
-
-                // Reset any active states or animations
-                document.querySelectorAll('.animated').forEach(el => {
-                    el.classList.remove('animated');
-                });
-
-                // Clear any hash from URL and set to home
-                history.replaceState(null, null, window.location.pathname + '#home');
-
-                // Fade back in and restart animations
+                document.body.style.transition = 'opacity 0.3s ease';
+                
                 setTimeout(() => {
-                    document.body.style.opacity = '1';
-
-                    // Force scroll to home section
+                    // Clear any existing hash from URL
+                    history.replaceState(null, null, window.location.pathname);
+                    
+                    // Scroll to home section
                     const homeSection = document.getElementById('home');
                     if (homeSection) {
                         homeSection.scrollIntoView({ behavior: 'instant' });
                     }
-
-                    // Restart typewriter animation
+                    
+                    // Fade back in
+                    document.body.style.opacity = '1';
+                    
+                    // Reset animations
                     const typewriterText = document.querySelector('.typewriter-text');
                     if (typewriterText) {
                         typewriterText.style.animation = 'none';
                         typewriterText.offsetHeight; // Trigger reflow
                         typewriterText.style.animation = 'typing 1.5s steps(40, end)';
                     }
-
-                    // Reset and restart hero section animations
+                    
                     const heroContent = document.querySelector('.hero-content');
                     if (heroContent) {
                         heroContent.style.animation = 'none';
@@ -2963,6 +2960,23 @@
                         heroContent.style.animation = 'fadeInUp 1s forwards 0.5s';
                     }
                 }, 100);
+            }
+        });
+
+        // Remove any existing beforeunload event handler
+        window.onbeforeunload = null;
+
+        // Add this to handle browser back button and history changes
+        window.addEventListener('popstate', function() {
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // If there's no hash, make sure we're at home
+            if (!window.location.hash) {
+                const homeSection = document.getElementById('home');
+                if (homeSection) {
+                    homeSection.scrollIntoView({ behavior: 'instant' });
+                }
             }
         });
 
@@ -3038,8 +3052,8 @@
                 window.scrollTo(0, 0);
                 
                 // Redirect to home page if not already there
-                if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
-                    window.location.href = '/index.html';
+                if (window.location.pathname !== '/' && window.location.pathname !== 'index.html') {
+                    window.location.href = 'index.html';
                     return;
                 }
                 
@@ -3072,8 +3086,8 @@
                 window.scrollTo(0, 0);
                 
                 // Redirect to home page if not already there
-                if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
-                    window.location.href = '/index.html';
+                if (window.location.pathname !== '/' && window.location.pathname !== 'index.html') {
+                    window.location.href = 'index.html';
                     return;
                 }
                 
@@ -3122,6 +3136,104 @@
         window.onbeforeunload = function() {
             window.scrollTo(0, 0);
         };
+
+        // Add this function to your existing script section
+        function scrollToActivities(event) {
+            event.preventDefault();
+            
+            const activitiesSection = document.querySelector('.section.activities');
+            if (activitiesSection) {
+                // Add fade effect
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.3s ease';
+                
+                setTimeout(() => {
+                    // Scroll to activities section
+                    activitiesSection.scrollIntoView({ behavior: 'smooth' });
+                    // Fade back in
+                    document.body.style.opacity = '1';
+                    
+                    // Update URL without triggering scroll
+                    history.pushState(null, null, '#activities');
+                }, 300);
+            }
+        }
+
+        // Refresh and navigation handling
+        window.addEventListener('load', function() {
+            // Check if page is being reloaded
+            if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+                handleRefresh();
+            }
+        });
+
+        // Handle manual refresh (F5 or Ctrl/Cmd + R)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F5' || (e.key === 'r' && (e.ctrlKey || e.metaKey))) {
+                e.preventDefault();
+                handleRefresh();
+            }
+        });
+
+        // Handle browser back button
+        window.addEventListener('popstate', function() {
+            handleRefresh();
+        });
+
+        function handleRefresh() {
+            try {
+                // Add fade-out effect
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.3s ease';
+                
+                // Get current page name
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                
+                // If not on index.html, redirect to it
+                if (currentPage !== 'index.html') {
+                    setTimeout(() => {
+                        window.location.replace('index.html');
+                    }, 300);
+                } else {
+                    // If on index.html, just scroll to top and reset
+                    setTimeout(() => {
+                        window.scrollTo(0, 0);
+                        document.body.style.opacity = '1';
+                        
+                        // Clear any hash from URL
+                        if (window.location.hash) {
+                            history.pushState('', document.title, window.location.pathname);
+                        }
+                        
+                        // Reset animations if needed
+                        resetAnimations();
+                    }, 300);
+                }
+            } catch (error) {
+                // Fallback behavior if there's an error
+                window.location.href = 'index.html';
+            }
+        }
+
+        function resetAnimations() {
+            // Reset any animations that need to be restarted
+            const typewriterText = document.querySelector('.typewriter-text');
+            if (typewriterText) {
+                typewriterText.style.animation = 'none';
+                typewriterText.offsetHeight; // Trigger reflow
+                typewriterText.style.animation = null;
+            }
+
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.animation = 'none';
+                heroContent.offsetHeight; // Trigger reflow
+                heroContent.style.animation = null;
+            }
+        }
+
+        // Remove the beforeunload event as it can cause issues in Chrome
+        window.onbeforeunload = null;
     </script>
 </body>
 

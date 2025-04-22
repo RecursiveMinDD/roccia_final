@@ -22,9 +22,10 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f9fa;
+            background: #ffffff;
             opacity: 0;
             animation: fadeIn 0.5s ease forwards;
+            transition: opacity 0.3s ease;
         }
 
         /* Header Styles */
@@ -42,15 +43,20 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .header-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            gap: 15px;
         }
 
         .logo h1 {
             font-family: 'Montserrat', sans-serif;
             color: var(--dark);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
 
         .back-btn {
@@ -64,15 +70,30 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.9rem;
         }
 
         .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(29, 169, 108, 0.3);
+            box-shadow: 0 5px 15px rgba(29, 169, 108, 0.2);
+            background: #1a8f5a;
+        }
+
+        .back-btn i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover i {
+            transform: translateX(-3px);
         }
 
         /* Gallery Sections */
-        .gallery-section {
+        .gallery-section:first-of-type {
+            padding-top: 180px;
+        }
+
+        .gallery-section:not(:first-of-type) {
             padding: 120px 20px 60px;
         }
 
@@ -213,6 +234,15 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .back-btn {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+
             .section-title h2 {
                 font-size: 2rem;
             }
@@ -222,18 +252,190 @@
                 gap: 15px;
             }
         }
+
+        /* UGC Section Styles */
+        .ugc-notice {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .ugc-notice p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .social-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-tags a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-tags a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .social-tags a::before {
+            content: '#';
+            font-size: 1.1em;
+            color: var(--primary);
+        }
+
+        /* Add placeholder styles for future UGC images */
+        .ugc-placeholder {
+            background: linear-gradient(45deg, #f3f3f3, #ffffff);
+            border: 2px dashed var(--primary);
+            border-radius: 15px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--primary);
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Add responsive styles for UGC section */
+        @media (max-width: 768px) {
+            .ugc-notice {
+                padding: 30px 20px;
+            }
+            
+            .ugc-notice p {
+                font-size: 1rem;
+            }
+            
+            .social-tags {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* UGC Gallery Item Specific Styles */
+        #ugc-gallery .gallery-grid {
+            gap: 20px;
+        }
+
+        #ugc-gallery .gallery-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            overflow: visible;
+        }
+
+        #ugc-gallery .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            gap: 10px;
+        }
+
+        #ugc-gallery .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #ugc-gallery .user-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        #ugc-gallery .post-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+
+        #ugc-gallery .post-content {
+            padding: 12px;
+        }
+
+        #ugc-gallery .post-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        #ugc-gallery .action-icon {
+            font-size: 1.4rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #ugc-gallery .action-icon:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        #ugc-gallery .post-likes {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        #ugc-gallery .post-caption {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--dark);
+        }
+
+        #ugc-gallery .post-time {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* Remove the previous hover effect */
+        #ugc-gallery .gallery-item::before {
+            display: none;
+        }
+
+        #ugc-gallery .gallery-overlay {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <div class="logo">
-                <h1>Roccia Gallery</h1>
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Roccia Gallery</h1>
+                </div>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Home</span>
+                </a>
             </div>
-            <a href="index.html" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Home
-            </a>
         </div>
     </header>
 
@@ -290,6 +492,13 @@
                 <div class="gallery-overlay">
                     <h3>ATV</h3>
                     <p>"No Roads? No Problem."</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="ropecourse.jpg" alt="rope course">
+                <div class="gallery-overlay">
+                    <h3>Rope Course</h3>
+                    <p>"Challenge Your Limits, One Rope at a Time."</p>
                 </div>
             </div>
         </div>
@@ -350,8 +559,111 @@
                     <p>"Where the Hills Whisper Peace."</p>
                 </div>
             </div>
+            <div class="gallery-item">
+                <img src="resortview.jpg" alt="Resort View">
+                <div class="gallery-overlay">
+                    <h3>Hill Resort At Night</h3>
+                    <p>"Where the Hills Whisper Peace."</p>
+                </div>
+            </div>
         </div>
     </section>
+
+    <section class="gallery-section" id="ugc-gallery">
+        <div class="section-title">
+            <h2>Guest Moments</h2>
+            <p>Beautiful memories shared by our amazing guests</p>
+        </div>
+        <div class="gallery-grid">
+            <!-- Add social media integration notice -->
+            <div class="ugc-notice">
+                <p>Share your memories with us using #RocciaMemories</p>
+                <div class="social-tags">
+                    <a href="https://www.instagram.com/roccia_adventure_park_" target="_blank">@roccia_adventure_park_</a>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="post-header">
+                    <img src="testimonialbhavya.jpg" alt="User Avatar" class="user-avatar">
+                    <span class="user-name">@bhavya8868</span>
+                </div>
+                <img src="UGC_zipline.jpg" alt="Guest Zipline Experience" class="post-image">
+                <div class="post-content">
+                    <div class="post-actions">
+                        <i class="fas fa-heart action-icon"></i>
+                        <i class="fas fa-comment action-icon"></i>
+                        <i class="fas fa-paper-plane action-icon"></i>
+                    </div>
+                    <div class="post-likes">1,234 likes</div>
+                    <div class="post-caption">
+                        <strong>@bhavya8868</strong> Best zipline experience ever! The view is breathtaking 🎢 #RocciaMemories
+                    </div>
+                    <div class="post-time">2 MONTHS AGO</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="post-header">
+                    <img src="avatar2.jpg" alt="User Avatar" class="user-avatar">
+                    <span class="user-name">@Vatsal_shah</span>
+                </div>
+                <img src="ugc_vatsal.jpg" alt="Guest Roccia Experience" class="post-image">
+                <div class="post-content">
+                    <div class="post-actions">
+                        <i class="fas fa-heart action-icon"></i>
+                        <i class="fas fa-comment action-icon"></i>
+                        <i class="fas fa-paper-plane action-icon"></i>
+                    </div>
+                    <div class="post-likes">956 likes</div>
+                    <div class="post-caption">
+                        <strong>@Vatsal_shah</strong> I Love Roccia Adventure Park ✨ #RocciaMemories
+                    </div>
+                    <div class="post-time">14 DAYS AGO</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="post-header">
+                    <img src="avatar3.jpg" alt="User Avatar" class="user-avatar">
+                    <span class="user-name">@Aakash_kapadia</span>
+                </div>
+                <img src="AAKASH_UGC.jpg" alt="Free Fly" class="post-image">
+                <div class="post-content">
+                    <div class="post-actions">
+                        <i class="fas fa-heart action-icon"></i>
+                        <i class="fas fa-comment action-icon"></i>
+                        <i class="fas fa-paper-plane action-icon"></i>
+                    </div>
+                    <div class="post-likes">789 likes</div>
+                    <div class="post-caption">
+                        <strong>@Aakash_kapadia</strong> Experience Flying with Free Fly 👨‍👩‍👧‍👦 #RocciaMemories
+                    </div>
+                    <div class="post-time">4 MONTHS AGO</div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="post-header">
+                    <img src="avatar4.jpg" alt="User Avatar" class="user-avatar">
+                    <span class="user-name">@vansh_shah</span>
+                </div>
+                <img src="ugc_paintball.jpg" alt="Paint Ball" class="post-image">
+                <div class="post-content">
+                    <div class="post-actions">
+                        <i class="fas fa-heart action-icon"></i>
+                        <i class="fas fa-comment action-icon"></i>
+                        <i class="fas fa-paper-plane action-icon"></i>
+                    </div>
+                    <div class="post-likes">543 likes</div>
+                    <div class="post-caption">
+                        <strong>@vansh_shah</strong> Paint Ball is fun 🍽️ #RocciaMemories
+                    </div>
+                    <div class="post-time">1 MONTH AGO</div>
+                </div>
+            </div>
+            
+         
 
     <!-- Lightbox -->
     <div class="lightbox">
@@ -419,6 +731,68 @@
                 item.style.animationDelay = `${index * 0.1}s`;
             });
         });
+
+        // Add this to your existing script section
+        document.querySelectorAll('#ugc-gallery .fa-heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.classList.toggle('fas');
+                this.classList.toggle('far');
+                this.style.color = this.classList.contains('fas') ? '#e31b23' : 'var(--dark)';
+                
+                const likesElement = this.closest('.post-content').querySelector('.post-likes');
+                let likes = parseInt(likesElement.textContent);
+                
+                if (this.classList.contains('fas')) {
+                    likes++;
+                } else {
+                    likes--;
+                }
+                
+                likesElement.textContent = `${likes.toLocaleString()} likes`;
+            });
+        });
+
+        // Refresh and navigation handling
+        window.addEventListener('load', function() {
+            // Check if page is being reloaded
+            if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+                fadeOutAndRedirect();
+            }
+        });
+
+        // Handle browser back button
+        window.addEventListener('popstate', function() {
+            fadeOutAndRedirect();
+        });
+
+        // Prevent default refresh behavior
+        window.onbeforeunload = function() {
+            document.body.style.opacity = '0';
+        };
+
+        // Handle manual refresh (F5 or Ctrl/Cmd + R)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F5' || (e.key === 'r' && (e.ctrlKey || e.metaKey))) {
+                e.preventDefault();
+                fadeOutAndRedirect();
+            }
+        });
+
+        function fadeOutAndRedirect() {
+            // Don't redirect if already on index.html
+            if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
+                return;
+            }
+            
+            // Add fade-out effect
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+            
+            // Redirect to index.html after fade
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 300);
+        }
     </script>
 </body>
 </html>
